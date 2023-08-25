@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-void find_mth_max_and_nth_min(int arr[], int size, int M, int N, int *mth_max, int *nth_min) 
-{
+#include <stdbool.h>
+
+void find_mth_max_and_nth_min(int arr[], int size, int M, int N, int *mth_max, int *nth_min) {
     // Sorting the array using selection sort
     for (int i = 0; i < size - 1; i++) {
         for (int j = i + 1; j < size; j++) {
@@ -12,6 +13,7 @@ void find_mth_max_and_nth_min(int arr[], int size, int M, int N, int *mth_max, i
             }
         }
     }
+
     if (M > size || N > size || M < 1 || N < 1) {
         // Invalid M or N values
         *mth_max = 0;
@@ -22,27 +24,37 @@ void find_mth_max_and_nth_min(int arr[], int size, int M, int N, int *mth_max, i
     *mth_max = arr[size - M];
     *nth_min = arr[N - 1];
 }
-void calculate_sum_and_difference(int a, int b, int *sum_result, int *diff_result) 
-{
+
+void calculate_sum_and_difference(int a, int b, int *sum_result, int *diff_result) {
     *sum_result = a + b;
     *diff_result = abs(a - b);
 }
-int main() 
-{
+
+int main() {
     int size;
     printf("Enter the size of the array: ");
     scanf("%d", &size);
+
     int array[size];
     printf("Enter %d elements:\n", size);
-    for (int i = 0; i < size; i++) 
-	{
-        scanf("%d", &array[i]);
+    for (int i = 0; i < size; i++) {
+        if (scanf("%d", &array[i]) != 1) {
+            printf("Invalid input. Please enter integers only.\n");
+            return 1; // Exit with an error code
+        }
     }
+
     int M, N;
     printf("Enter the value of M: ");
-    scanf("%d", &M);
+    if (scanf("%d", &M) != 1) {
+        printf("Invalid input. Please enter an integer.\n");
+        return 1; // Exit with an error code
+    }
     printf("Enter the value of N: ");
-    scanf("%d", &N);
+    if (scanf("%d", &N) != 1) {
+        printf("Invalid input. Please enter an integer.\n");
+        return 1; // Exit with an error code
+    }
 
     int mth_max, nth_min, sum_result, diff_result;
 
